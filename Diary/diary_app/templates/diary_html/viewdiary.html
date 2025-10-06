@@ -1,0 +1,39 @@
+{% extends 'diary_html/base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-light text-gray-800">我的记录</h1>
+        <a href="{% url 'createDiary' %}" class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition-bg">
+            添加新记录
+        </a>
+        <a  class="bg-gray-800 hover:bg-gray-700 text-white px-2 py-2 rounded-md transition-bg">导出本周记录</a>
+    
+    </div>
+  
+
+    {% if diary %}
+        <div class="space-y-6">
+            {% for entry in diary reversed %}
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all hover:shadow-md animate-slide-up">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-gray-500 text-sm">
+                            {{ entry.Data|date:"Y年m月d日 H:i" }}
+                        </span>
+                        <div class="space-x-2">
+                            <a href="{% url 'updateDiary' entry.id %}" class="text-gray-500 hover:text-gray-800 text-sm">编辑</a>
+                            <a href="{% url 'deleteDiary' entry.id %}" class="text-gray-500 hover:text-red-500 text-sm">删除</a>
+                        </div>
+                    </div>
+                    <div class="text-gray-800 whitespace-pre-line">{{ entry.note }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-12 border border-dashed border-gray-200 rounded-lg">
+            <p class="text-gray-500">暂无记录</p>
+            <a href="{% url 'createDiary' %}" class="text-gray-800 hover:text-gray-600 mt-2 inline-block">添加第一条记录</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

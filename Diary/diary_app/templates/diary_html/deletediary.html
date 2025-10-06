@@ -1,0 +1,21 @@
+{% extends 'diary_html/base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+    <h1 class="text-2xl font-light mb-4 text-gray-800">确认删除</h1>
+    <p class="text-gray-600 mb-6">您确定要删除这篇日记吗？此操作无法撤销。</p>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <div class="flex justify-end gap-4">
+            <a href="{% url 'viewDiary' %}" class="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-bg">
+                取消
+            </a>
+            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-md transition-bg">
+                确认删除
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极简日记</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+            .animate-slide-up {
+                animation: slideUp 0.4s ease-out;
+            }
+            .transition-bg {
+                transition: background-color 0.3s ease;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="text-xl font-semibold text-gray-900 hover:text-gray-600 transition-colors">极简日记</a>
+            <nav class="space-x-4">
+                <a href="{% url 'home' %}" class="text-gray-600 hover:text-gray-900 transition-colors">首页</a>
+                <a href="{% url 'createDiary' %}" class="text-gray-600 hover:text-gray-900 transition-colors">写日记</a>
+                <a href="{% url 'viewDiary' %}" class="text-gray-600 hover:text-gray-900 transition-colors">日记列表</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white border-t mt-12 py-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            <p>© {% now "Y" %} 极简日记 | 简洁记录每一天</p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.querySelector('main');
+            mainContent.classList.add('animate-fade-in');
+
+            // 为所有按钮添加悬停效果
+            const buttons = document.querySelectorAll('button, a');
+            buttons.forEach(button => {
+                button.classList.add('transition-all', 'duration-300');
+            });
+        });
+    </script>
+</body>
+</html>

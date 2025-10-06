@@ -1,0 +1,27 @@
+{% extends 'diary_html/base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-2xl font-light mb-8 text-gray-800">编辑日记</h1>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all hover:shadow-md">
+            {{ form.note.label_tag }}
+            {{ form.note.errors }}
+            {{ form.note }}
+            <p class="text-gray-500 text-sm mt-2">最多可输入1500字</p>
+        </div>
+
+        <div class="flex justify-end gap-4 pt-4">
+            <a href="{% url 'viewDiary' %}" class="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-bg">
+                取消
+            </a>
+            <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-2 rounded-md transition-bg">
+                更新日记
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

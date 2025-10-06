@@ -1,0 +1,22 @@
+{% extends 'diary_html/base.html' %}
+
+{% block content %}
+<div class="text-center max-w-2xl mx-auto">
+    <h1 class="text-4xl font-light mb-6 text-gray-800">记录生活的<span class="font-medium">每一刻</span></h1>
+    <p class="text-gray-600 mb-8 text-lg">简洁、优雅的日记空间，让思绪自然流淌</p>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8 animate-slide-up">
+        <a href="{% url 'createDiary' %}" class="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-md transition-bg text-center">
+            开始写日记
+        </a>
+        <a href="{% url 'viewDiary' %}" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 px-8 py-3 rounded-md transition-bg text-center">
+            查看日记列表
+        </a>
+    </div>
+
+    <div class="mt-16 border-t border-gray-200 pt-8">
+        <h2 class="text-xl font-light mb-4 text-gray-700">极简设计</h2>
+        <p class="text-gray-600 max-w-md mx-auto">专注于内容本身，去除不必要的干扰，让写作成为一种享受。</p>
+    </div>
+</div>
+{% endblock %}
